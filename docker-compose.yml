@@ -1,0 +1,21 @@
+version: '3.2'
+services:
+    grpc_cxx:
+        container_name: grpc-cxx
+#        user: "1003:1003"
+        build:
+            context: .
+            dockerfile: ./Dockerfile
+        image: grpc-cxx
+        environment:
+         - APACHE_LOG_NAME=kjell2.haxx.se
+         - APACHE_SERVER_NAME=kjell2.haxx.se
+         - APACHE_SERVER_ALIAS=www.kjell2.haxx.se
+         - APACHE_SERVER_ADMIN=kjell@haxx.se
+         - VIRTUAL_HOST=kjell2.haxx.se # Environment variable needed for nginx proxy
+         - LETSENCRYPT_HOST=kjell2.haxx.se # Environment variables needed for Let's Encrypt companion
+         - LETSENCRYPT_EMAIL=kjell@haxx.se
+         - TZ=Europe/Stockholm
+
+        volumes:
+          - ./src:/src
