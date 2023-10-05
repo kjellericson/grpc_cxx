@@ -16,13 +16,14 @@ RUN git clone -b v1.59.0 https://github.com/grpc/grpc ;\
     cd grpc ; \
     git submodule update --init
 
+# Compile grpc
 RUN cd grpc; \
     mkdir -p cmake/build ;\
     cd cmake/build ;\
     cmake ../.. ;\
     make
 
-# NOTE: all of gRPC's dependencies need to be already installed
+# Build release packages
 RUN cd grpc;\
     mkdir -p cmake/build ;\
     cd cmake/build ;\
