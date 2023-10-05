@@ -1,24 +1,15 @@
-ps:
-	docker-compose ps
+
+ROOT_DIR:=$(shell dirname $(realpath $(firstword $(MAKEFILE_LIST))))
+
 
 build:
 	docker-compose build
 
-stop:
-	docker-compose stop
-
-down:
-	docker-compose down
-
-up:
-	docker-compose up -d
-
-restart:
-	docker-compose restart
-
 bash:
-	docker run -it grpc-cxx /bin/bash
+	docker run -it -v $(ROOT_DIR)/src:/src --workdir /src grpc-cxx /bin/bash
 
-logs:
-	docker container logs -f grpc-cxx
+compile:
+	docker run -it -v $(ROOT_DIR)/src:/src --workdir /src grpc-cxx /bin/bash -c "./compile.sh"
 
+clean:
+	docker run -it -v $(ROOT_DIR)/src:/src --workdir /src grpc-cxx /bin/bash -c "rm -fr build"
