@@ -26,10 +26,6 @@ Start two terminals and run `src/build/greeter_server` and `src/build/greeter_cl
 
 You can start a bash in the image with `make bash` in case you like to test some changes.
 
-## Todo
-
-The permissions in the build catalog is not correct.  If it is important then you can add in your compile script a `chmod -R a+x build` or something.
-
 ## Did it help you?
 
 Send me an email at kjell@haxx.se if this helped you.
