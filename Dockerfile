@@ -1,15 +1,18 @@
-FROM ubuntu
+FROM ubuntu:focal
 
+ARG DEBIAN_FRONTEND=noninteractive
 RUN apt-get update
 
-RUN apt-get install -y build-essential autoconf libtool pkg-config
+RUN apt-get install -y build-essential autoconf libtool pkg-config curl \
+    software-properties-common git
 
-RUN apt-get install -y cmake
+# Install latest cmake
+RUN curl https://apt.kitware.com/keys/kitware-archive-latest.asc | apt-key add -
+RUN add-apt-repository 'deb https://apt.kitware.com/ubuntu/ focal main'
+RUN apt install -y cmake
 
 # clang and LLVM C++ lib is only required for sanitizer builds
 RUN apt-get install -y clang libc++-dev
-
-RUN apt-get install -y git
 
 #v1.59.0 from 2023-09-25
 RUN git clone -b v1.59.0 https://github.com/grpc/grpc ;\
